@@ -1,0 +1,22 @@
+#if(!$package.isEmpty())
+package $package;
+#end
+
+import java.util.List;
+import com.ssh.system.dao.base.IBaseEntryDaoImp;
+#foreach($importClass in $importClassList)
+import $importClass;
+#end
+
+/**
+ * @author $author
+ * @Description $comment
+ * @date $date
+ */
+public interface $simpleName extends IBaseEntryDaoImp<$entitySimpleName, $primaryKeyDataType> {
+
+    List<$entitySimpleName> findListByStatus(Integer status);
+
+    int delById($primaryKeyDataType id);
+
+}

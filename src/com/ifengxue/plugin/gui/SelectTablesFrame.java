@@ -11,6 +11,8 @@ import com.ifengxue.plugin.generator.config.DriverConfig;
 import com.ifengxue.plugin.generator.config.GeneratorConfig;
 import com.ifengxue.plugin.generator.config.TablesConfig;
 import com.ifengxue.plugin.generator.config.TablesConfig.ORM;
+import com.ifengxue.plugin.generator.source.DaoImpSourceParser;
+import com.ifengxue.plugin.generator.source.DaoSourceParser;
 import com.ifengxue.plugin.generator.source.EntitySourceParser;
 import com.ifengxue.plugin.generator.source.JpaRepositorySourceParser;
 import com.ifengxue.plugin.i18n.LocaleContextHolder;
@@ -270,6 +272,10 @@ public class SelectTablesFrame {
       velocityEngine.addProperty("output.encoding", encoding);
       JpaRepositorySourceParser repositorySourceParser = new JpaRepositorySourceParser();
       repositorySourceParser.setVelocityEngine(velocityEngine, encoding);
+      DaoSourceParser daoSourceParser = new DaoSourceParser();
+      daoSourceParser.setVelocityEngine(velocityEngine, encoding);
+      DaoImpSourceParser daoImpSourceParser = new DaoImpSourceParser();
+      daoImpSourceParser.setVelocityEngine(velocityEngine, encoding);
 
       EntitySourceParser sourceParser = new EntitySourceParser();
 
@@ -349,8 +355,12 @@ public class SelectTablesFrame {
         // 生成源码
         String sourceCode = sourceParser.parse(generatorConfig, table);
         WriteCommandAction.runWriteCommandAction(project, () -> {
-          String filename = table.getEntityName() + ".java";
+          String filename = table.getEntityName() + "Vo.java";
           writeContent(project, filename, config.getEntityDirectory(), sourceCode);
+          String daoFileName = "I" + table.getEntityName() + "Dao.java";
+          String daoImpFileName = table.getEntityName() + "DaoImp.java";
+          writeContent(project, daoFileName, config.getRepositoryDirectory(), daoSourceParser.parse(generatorConfig, table));
+          writeContent(project, daoImpFileName, config.getRepositoryDirectory() + "/imp", daoImpSourceParser.parse(generatorConfig, table));
           if (!config.isGenerateRepository()) {
             if (generateCount.decrementAndGet() <= 0) {
               ApplicationManager.getApplication().invokeAndWait(frameHolder::requestFocus);

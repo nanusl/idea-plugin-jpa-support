@@ -184,9 +184,9 @@ public class AutoGeneratorSettingsFrame {
     settings.getTextAddTableNameSuffix().setText(applicationProperties.getValue(createKey("add_table_suffix"), ""));
     settings.getTextRemoveFieldPrefix().setText(applicationProperties.getValue(createKey("remove_field_prefix"), "f_"));
     settings.getChkBoxUseLombok()
-        .setSelected((applicationProperties.getBoolean(createKey("use_lombok"), true)));
+        .setSelected((applicationProperties.getBoolean(createKey("use_lombok"), false)));
     settings.getChkBoxGenerateRepository()
-        .setSelected((applicationProperties.getBoolean(createKey("generate_repository"), true)));
+        .setSelected((applicationProperties.getBoolean(createKey("generate_repository"), false)));
     settings.getChkBoxSerializable()
         .setSelected((applicationProperties.getBoolean(createKey("implement_serializable"), true)));
     settings.getChkBoxGenerateClassComment()
@@ -194,7 +194,7 @@ public class AutoGeneratorSettingsFrame {
     settings.getChkBoxGenerateFieldComment()
         .setSelected((applicationProperties.getBoolean(createKey("generate_field_comment"), true)));
     settings.getChkBoxGenerateMethodComment()
-        .setSelected((applicationProperties.getBoolean(createKey("generate_method_comment"), true)));
+        .setSelected((applicationProperties.getBoolean(createKey("generate_method_comment"), false)));
     settings.getTextExtendBaseClass().setText(projectProperties.getValue(createKey("extend_base_class"), ""));
     settings.getTextExcludeFields().setText(projectProperties.getValue(createKey("exclude_fields"), ""));
     settings.getTextEntityPackage().setText(projectProperties.getValue(createKey("entity_package"), ""));

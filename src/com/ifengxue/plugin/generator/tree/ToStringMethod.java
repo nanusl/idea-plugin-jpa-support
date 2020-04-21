@@ -14,7 +14,7 @@ public class ToStringMethod extends AbstractElement {
     if (fields.isEmpty()) {
       return aClass.getSimpleName() + "{}";
     }
-    StringBuilder builder = new StringBuilder("public String toString() {").append(lineSeparator);
+    StringBuilder builder = new StringBuilder("@Override\r\npublic String toString() {").append(lineSeparator);
     builder.append(indent.getIndent()).append("return \"").append(aClass.getSimpleName()).append("{");
     builder.append(fields.stream()
         .map(element -> (Field) element)

@@ -1,5 +1,8 @@
 package com.ifengxue.plugin.generator.tree;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Comment extends AbstractElement {
 
   private String comment;
@@ -32,8 +35,10 @@ public class Comment extends AbstractElement {
     switch (commentType) {
       case CLASS:
         return "/**" + lineSeparator +
-            " * " + comment + lineSeparator +
-            " */";
+                " * @author " + System.getProperty("user.name") + lineSeparator +
+                " * @Description " + comment + lineSeparator +
+                " * @date " + DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm").format(LocalDateTime.now()) + lineSeparator +
+                " */";
       default:
         return "/**" + lineSeparator +
             indent.getIndent() + " * " + comment + lineSeparator +
