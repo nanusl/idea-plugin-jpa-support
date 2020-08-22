@@ -43,13 +43,15 @@ import $importClass;
 #end
 #if($tablesConfig.isUseClassComment() && !$table.getTableComment().isEmpty())
 /**
- * $table.getTableComment()
- */
+* @author $author
+* @Description $table.getTableComment()
+* @date $date
+*/
 #end
 #foreach($annotation in $annotationList)
 @$annotation
 #end
-public class $simpleName#if(!$parentClass.isEmpty()) extends $parentClass#end#if($implementClassList) implements $empty.join(", ", $implementClassList)#end {
+public class $simpleName#if(!$parentClass.isEmpty()) extends $parentSimpleName#end#if($implementClassList) implements $empty.join(", ", $implementClassList)#end {
 
 #if($serialVersionUID)
 private static final long serialVersionUID = ${serialVersionUID}L;

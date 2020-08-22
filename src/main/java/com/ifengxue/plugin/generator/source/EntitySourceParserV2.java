@@ -10,9 +10,13 @@ import com.ifengxue.plugin.state.SettingsState;
 import com.ifengxue.plugin.util.StringHelper;
 import com.intellij.openapi.components.ServiceManager;
 import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.function.Supplier;
+
+import org.apache.commons.lang.StringUtils;
 import org.apache.velocity.VelocityContext;
 
 public class EntitySourceParserV2 extends AbstractSourceParser {
@@ -43,10 +47,19 @@ public class EntitySourceParserV2 extends AbstractSourceParser {
     context.put("importClassList", importClassList);
     Set<String> annotationList = new HashSet<>();
     context.put("annotationList", annotationList);
-    context.put("simpleName", table.getEntityName());
+    context.put("simpleName", table.getEntityName() + "Vo");
+    context.put("author", System.getProperty("user.name"));
+    context.put("date", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm").format(LocalDateTime.now()));
     context.put("parentClass", tablesConfig.getExtendsEntityName());
     Set<String> implementClassList = new HashSet<>();
     context.put("implementClassList", implementClassList);
+
+    // 父类
+    if (StringUtils.isNotBlank(tablesConfig.getExtendsEntityName())) {
+      String extendsEntityName = tablesConfig.getExtendsEntityName();
+      context.put("parentSimpleName", StringHelper.parseSimpleName(extendsEntityName));
+      importClassList.add(extendsEntityName);
+    }
 
     // 增加序列化注解
     if (tablesConfig.isSerializable()) {

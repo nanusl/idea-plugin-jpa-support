@@ -70,11 +70,11 @@ public class AutoGeneratorSettingsState implements PersistentStateComponent<Auto
   /**
    * 是否使用Lombok<a href="https://projectlombok.org/">Lombok</a>
    */
-  private boolean useLombok = true;
+  private boolean useLombok = false;
   /**
    * 是否生成Repository
    */
-  private boolean generateRepository = true;
+  private boolean generateRepository = false;
   /**
    * 实体是否实现{@link java.io.Serializable}
    */
@@ -90,7 +90,7 @@ public class AutoGeneratorSettingsState implements PersistentStateComponent<Auto
   /**
    * 是否生成方法注释
    */
-  private boolean generateMethodComment = true;
+  private boolean generateMethodComment = false;
   /**
    * 是否使用Java 8日期时间类型
    *
@@ -100,7 +100,7 @@ public class AutoGeneratorSettingsState implements PersistentStateComponent<Auto
   /**
    * 生成字段默认值（仅在列声明了默认值时有效）
    */
-  private boolean generateDefaultValue = false;
+  private boolean generateDefaultValue = true;
   /**
    * 生成日期时间字段默认值（仅在列声明了默认值时有效）
    */

@@ -3,7 +3,6 @@ package com.ifengxue.plugin.generator.source;
 import com.ifengxue.plugin.entity.Table;
 import com.ifengxue.plugin.generator.config.GeneratorConfig;
 import com.ifengxue.plugin.generator.config.TablesConfig;
-import org.apache.commons.io.IOUtils;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 
@@ -12,7 +11,6 @@ import java.io.InputStream;
 import java.io.StringWriter;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
 import java.util.Collections;
 
 public class DaoSourceParser implements SourceParser, VelocityEngineAware {

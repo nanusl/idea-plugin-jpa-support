@@ -310,6 +310,7 @@ public class StringHelper {
    * @param removePrefix 要移除的前缀
    */
   public static String parseFieldName(String columnName, String removePrefix) {
+    columnName = columnName.toLowerCase();
     if (removePrefix == null || removePrefix.isEmpty() || !columnName.startsWith(removePrefix)) {
       return parseFieldName(columnName);
     }

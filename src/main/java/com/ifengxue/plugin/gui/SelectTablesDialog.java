@@ -282,9 +282,9 @@ public class SelectTablesDialog extends DialogWrapper {
       JpaRepositorySourceParser repositorySourceParser = new JpaRepositorySourceParser();
       repositorySourceParser.setVelocityEngine(VelocityUtil.getInstance(), encoding);
       DaoSourceParser daoSourceParser = new DaoSourceParser();
-      daoSourceParser.setVelocityEngine(velocityEngine, encoding);
+      daoSourceParser.setVelocityEngine(VelocityUtil.getInstance(), encoding);
       DaoImpSourceParser daoImpSourceParser = new DaoImpSourceParser();
-      daoImpSourceParser.setVelocityEngine(velocityEngine, encoding);
+      daoImpSourceParser.setVelocityEngine(VelocityUtil.getInstance(), encoding);
 
       EntitySourceParserV2 sourceParser = new EntitySourceParserV2();
       sourceParser.setVelocityEngine(VelocityUtil.getInstance(), encoding);
@@ -350,12 +350,20 @@ public class SelectTablesDialog extends DialogWrapper {
 
         // 生成源码
         String sourceCode = sourceParser.parse(generatorConfig, table);
+        String daoSourceCode = daoSourceParser.parse(generatorConfig, table);
+        String daoImpSourceCode = daoImpSourceParser.parse(generatorConfig, table);
         WriteCommandAction.runWriteCommandAction(project, () -> {
-          String fileExtension = ".java";
+          String fileExtension = "Vo.java";
           String filename = table.getEntityName() + fileExtension;
           try {
             writeContent(project, filename, autoGeneratorSettingsState.getEntityParentDirectory(),
                 autoGeneratorSettingsState.getEntityPackageName(), sourceCode);
+            String daoFileName = "I" + table.getEntityName() + "Dao.java";
+            writeContent(project, daoFileName, autoGeneratorSettingsState.getRepositoryParentDirectory(),
+                autoGeneratorSettingsState.getRepositoryPackageName(), daoSourceCode);
+            String daoImpFileName = table.getEntityName() + "DaoImp.java";
+            writeContent(project, daoImpFileName, autoGeneratorSettingsState.getRepositoryParentDirectory(),
+                autoGeneratorSettingsState.getRepositoryPackageName() + ".imp", daoImpSourceCode);
             if (autoGeneratorSettingsState.isGenerateRepository()) {
               filename = table.getRepositoryName() + fileExtension;
               String repositorySourceCode = repositorySourceParser.parse(generatorConfig, table);
