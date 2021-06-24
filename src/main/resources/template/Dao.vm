@@ -9,14 +9,10 @@ import $importClass;
 #end
 
 /**
+ * $comment
  * @author $author
- * @Description $comment
  * @date $date
  */
 public interface $simpleName extends IBaseEntryDaoImp<$entitySimpleName, $primaryKeyDataType> {
-
-    List<$entitySimpleName> findListByStatus(Integer status);
-
-    int delById($primaryKeyDataType id);
 
 }

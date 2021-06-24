@@ -12,25 +12,10 @@ import $importClass;
 #end
 
 /**
- * @author $author
- * @Description $comment
- * @date $date
- */
+* $comment
+* @author $author
+* @date $date
+*/
 public class $simpleName extends BaseEntryDaoImp<$entitySimpleName, $primaryKeyDataType> implements $DaoName {
-
-    @Override
-    public List<$entitySimpleName> findListByStatus(Integer status) {
-        Criteria c = getSession().createCriteria($entitySimpleClassName);
-        c.add(Restrictions.eq("status", status));
-        return c.list();
-    }
-
-    @Override
-    public int delById($primaryKeyDataType id) {
-        String sql = "DELETE FROM $entitySimpleName WHERE id=?";
-        Query query = getSession().createQuery(sql);
-        query.setParameter(0, id);
-        return query.executeUpdate();
-    }
 
 }

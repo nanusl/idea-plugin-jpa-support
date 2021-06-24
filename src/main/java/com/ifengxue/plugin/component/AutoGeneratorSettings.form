@@ -86,14 +86,14 @@
             <constraints/>
             <properties>
               <horizontalAlignment value="10"/>
-              <selected value="true"/>
+              <selected value="false"/>
               <text resource-bundle="bundles/ui_i18n" key="use_lombok"/>
             </properties>
           </component>
           <component id="3b39b" class="javax.swing.JCheckBox" binding="chkBoxGenerateRepository">
             <constraints/>
             <properties>
-              <selected value="true"/>
+              <selected value="false"/>
               <text resource-bundle="bundles/ui_i18n" key="generate_repository"/>
             </properties>
           </component>
@@ -158,7 +158,7 @@
             <constraints/>
             <properties>
               <enabled value="true"/>
-              <selected value="true"/>
+              <selected value="false"/>
               <text resource-bundle="bundles/ui_i18n" key="generate_method_comment"/>
             </properties>
           </component>

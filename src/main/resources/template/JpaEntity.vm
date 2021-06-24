@@ -43,8 +43,8 @@ import $importClass;
 #end
 #if($tablesConfig.isUseClassComment() && !$table.getTableComment().isEmpty())
 /**
+* $table.getTableComment()
 * @author $author
-* @Description $table.getTableComment()
 * @date $date
 */
 #end

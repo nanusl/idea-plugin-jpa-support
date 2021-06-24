@@ -20,7 +20,7 @@ apply plugin: 'org.jetbrains.intellij'
 apply plugin: 'io.freefair.lombok'
 
 group 'com.ifengxue'
-version '2.0.1'
+version '2.0.3.1'
 
 java {
     sourceCompatibility JavaVersion.VERSION_1_8
@@ -38,6 +38,7 @@ dependencies {
     compile group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.2'
     compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.12'
     compileOnly fileTree('lib')
+    compileOnly fileTree('/Applications/IntelliJ IDEA.app/Contents/plugins/DatabaseTools/lib')
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
 
